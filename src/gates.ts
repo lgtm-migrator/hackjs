@@ -1,0 +1,57 @@
+/**
+ * Implements various logic gates based on one or more input gates and one or more output gate.
+ * Everything except the NAND gate is implemented entirely by compositing other gates.
+ */
+import { Bit } from "./hackjs";
+
+/**
+ * A NAND (not-and) gate, the only gate not implemented as a composite of other gates.
+ */
+export const Nand = (a: Bit, b: Bit): Bit => (a && b ? 0 : 1);
+
+/**
+ * A NOT gate, inverts the input.
+ */
+export const Not = (a: Bit): Bit => Nand(a, a);
+
+/**
+ * An AND gate, returns 1 when both a and b is 1.
+ */
+export const And = (a: Bit, b: Bit): Bit => Nand(
+  Nand(a, b),
+  Nand(a, b),
+);
+
+/**
+ * An OR gate, returns 1 if either a or b (or both) is 1.
+ */
+export const Or = (a: Bit, b: Bit): Bit => Nand(
+  Not(a),
+  Not(b),
+);
+
+/**
+ * A NOR (not OR) gate, returns 1 if both a and b is 0.
+ */
+export const Nor = (a: Bit, b: Bit): Bit => Not(
+  Or(a, b),
+);
+
+/**
+ * An XOR (exclusive-or) gate, returns 1 if either a or b is 1, buth not both.
+ */
+export const Xor = (a: Bit, b: Bit): Bit => Or(
+  And(a, Not(b)),
+  And(Not(a), b),
+);
+
+/**
+ * An XNOR (exclusive-not-or) gate, return 1 if a and b is equal.
+ */
+export const Xnor = (a: Bit, b: Bit): Bit => Nand(
+  Nand(
+    Nand(a, a),
+    Nand(b, b),
+  ),
+  Nand(a, b),
+);

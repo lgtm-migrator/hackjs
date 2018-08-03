@@ -1,8 +1,8 @@
 /**
- * Implements various logic gates based on one or more input gates and one or more output gate.
+ * Implements various elementary logic gates based on one or more input gates and one or more output gate.
  * Everything except the NAND gate is implemented entirely by compositing other gates.
  */
-import { Bit } from "./hackjs";
+import { Bit } from "../hackjs";
 
 /**
  * A NAND (not-and) gate, the only gate not implemented as a composite of other gates.
@@ -49,9 +49,20 @@ export const Xor = (a: Bit, b: Bit): Bit => Or(
  * An XNOR (exclusive-not-or) gate, return 1 if a and b is equal.
  */
 export const Xnor = (a: Bit, b: Bit): Bit => Nand(
+  // TODO: simplify using composite gates.
   Nand(
     Nand(a, a),
     Nand(b, b),
   ),
   Nand(a, b),
 );
+
+/**
+ * A multiplexor gate. Selects bit a, when the selector is 0, otherwise bit b is outputted.
+ */
+export const Mux = (a: Bit, b: Bit, sel: Bit): Bit => (0);
+
+/**
+ * A demultiplexor gate. Outputs the input based on the selector bit.
+ */
+// export const Dmux = (in: Bit, sel: Bit) => {};  // TODO: implement + handle tuple type.

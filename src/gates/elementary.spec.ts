@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import * as gates from "./gates";
+import * as gates from ".";
 
 describe("Nand gate", () => {
   it("should validate truth table", () => {
@@ -62,3 +62,26 @@ describe("Xnor gate", () => {
     expect(gates.Xnor(1, 1)).to.eq(1);
   });
 });
+
+describe("Mux gate", () => {
+  it("should validate truth table", () => {
+    expect(gates.Mux(0, 0, 0)).to.eq(0);
+    expect(gates.Mux(0, 1, 0)).to.eq(0);
+    expect(gates.Mux(1, 0, 0)).to.eq(1);
+    expect(gates.Mux(1, 1, 0)).to.eq(1);
+    expect(gates.Mux(0, 0, 1)).to.eq(0);
+    expect(gates.Mux(0, 1, 1)).to.eq(1);
+    expect(gates.Mux(1, 0, 1)).to.eq(0);
+    expect(gates.Mux(1, 1, 1)).to.eq(1);
+  });
+});
+
+// TODO: enable when dmux has been implemented.
+// describe("DMux gate", () => {
+//   it("should validate truth table", () => {
+//     expect(gates.Dmux(0, 0)).to.eq([0, 0]);
+//     expect(gates.Dmux(0, 1)).to.eq([0, 0]);
+//     expect(gates.Dmux(1, 0)).to.eq([1, 0]);
+//     expect(gates.Dmux(1, 1)).to.eq([0, 1]);
+//   });
+// });

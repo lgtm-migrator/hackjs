@@ -49,10 +49,9 @@ export const Xor = (a: Bit, b: Bit): Bit => Or(
  * An XNOR (exclusive-not-or) gate, return 1 if a and b is equal.
  */
 export const Xnor = (a: Bit, b: Bit): Bit => Nand(
-  // TODO: simplify using composite gates.
   Nand(
-    Nand(a, a),
-    Nand(b, b),
+    Not(a),
+    Not(b),
   ),
   Nand(a, b),
 );

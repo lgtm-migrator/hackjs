@@ -60,7 +60,10 @@ export const Xnor = (a: Bit, b: Bit): Bit => Nand(
 /**
  * A multiplexor gate. Selects bit a, when the selector is 0, otherwise bit b is outputted.
  */
-export const Mux = (a: Bit, b: Bit, sel: Bit): Bit => (0);
+export const Mux = (a: Bit, b: Bit, sel: Bit): Bit => Or(
+  And(Not(sel), a),
+  And(sel, b),
+);
 
 /**
  * A demultiplexor gate. Outputs the input based on the selector bit.

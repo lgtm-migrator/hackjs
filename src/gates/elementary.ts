@@ -68,4 +68,7 @@ export const Mux = (a: Bit, b: Bit, sel: Bit): Bit => Or(
 /**
  * A demultiplexor gate. Outputs the input based on the selector bit.
  */
-// export const Dmux = (in: Bit, sel: Bit) => {};  // TODO: implement + handle tuple type.
+export const Dmux = (input: Bit, sel: Bit): [Bit, Bit] => [
+  And(Not(sel), input),
+  And(sel, input),
+];

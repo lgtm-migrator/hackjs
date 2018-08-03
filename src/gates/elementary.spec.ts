@@ -76,12 +76,11 @@ describe("Mux gate", () => {
   });
 });
 
-// TODO: enable when dmux has been implemented.
-// describe("DMux gate", () => {
-//   it("should validate truth table", () => {
-//     expect(gates.Dmux(0, 0)).to.eq([0, 0]);
-//     expect(gates.Dmux(0, 1)).to.eq([0, 0]);
-//     expect(gates.Dmux(1, 0)).to.eq([1, 0]);
-//     expect(gates.Dmux(1, 1)).to.eq([0, 1]);
-//   });
-// });
+describe("Dmux gate", () => {
+  it("should validate truth table", () => {
+    expect(gates.Dmux(0, 0)).to.eql([0, 0]);
+    expect(gates.Dmux(0, 1)).to.eql([0, 0]);
+    expect(gates.Dmux(1, 0)).to.eql([1, 0]);
+    expect(gates.Dmux(1, 1)).to.eql([0, 1]);
+  });
+});

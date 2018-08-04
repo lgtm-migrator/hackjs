@@ -2,7 +2,7 @@
  * Implements various elementary logic gates based on one or more input gates and one or more output gate.
  * Everything except the NAND gate is implemented entirely by compositing other gates.
  */
-import { Bit, Bit2 } from "../hackjs";
+import { Bit, Bit2, Bit3 } from "../hackjs";
 
 /**
  * A NAND (not-and) gate, the only gate not implemented as a composite of other gates.
@@ -78,6 +78,20 @@ export const Mux4 = (a: Bit, b: Bit, c: Bit, d: Bit, sel: Bit2): Bit => Or(
   And(
     sel[1],
     Mux(c, d, sel[0]),
+  ),
+);
+
+/**
+ * A 8-way multiplexor.
+ */
+export const Mux8 = (a: Bit, b: Bit, c: Bit, d: Bit, e: Bit, f: Bit, g: Bit, h: Bit, sel: Bit3): Bit => Or(
+  And(
+    Not(sel[2]),
+    Mux4(a, b, c, d, [sel[0], sel[1]]),
+  ),
+  And(
+    sel[2],
+    Mux4(e, f, g, h, [sel[0], sel[1]]),
   ),
 );
 

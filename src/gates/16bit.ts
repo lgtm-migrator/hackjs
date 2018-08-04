@@ -1,9 +1,15 @@
 import { Bit, Bit16 } from "../hackjs";
 import { And, Mux, Not, Or } from "./elementary";
 
+/**
+ * A 16-bit NOT gate, that applies the boolean NOT operation to each bit.
+ */
 export const Not16 = (a: Bit16): Bit16 => (a.map((b) =>
   Not(b))) as Bit16;
 
+/**
+ * A 16-bit AND gate, that applies the boolean AND operation to each bit pair.
+ */
 export const And16 = (a: Bit16, b: Bit16): Bit16 => ([
   And(a[0], b[0]),
   And(a[1], b[1]),
@@ -23,6 +29,9 @@ export const And16 = (a: Bit16, b: Bit16): Bit16 => ([
   And(a[15], b[15]),
 ]);
 
+/**
+ * A 16-bit OR gate, that applies the boolean OR operation to each bit pair.
+ */
 export const Or16 = (a: Bit16, b: Bit16): Bit16 => ([
   Or(a[0], b[0]),
   Or(a[1], b[1]),
@@ -42,6 +51,9 @@ export const Or16 = (a: Bit16, b: Bit16): Bit16 => ([
   Or(a[15], b[15]),
 ]);
 
+/**
+ * A 16-bit multiplexor.
+ */
 export const Mux16 = (a: Bit16, b: Bit16, sel: Bit): Bit16 => ([
   Mux(a[0], b[0], sel),
   Mux(a[1], b[1], sel),

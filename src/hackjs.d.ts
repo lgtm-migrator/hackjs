@@ -11,6 +11,12 @@ export type Bit = 0 | 1;
 export type Bit2 = [Bit, Bit];
 
 /**
+ * A 8 bit type, as a tuple.
+ */
+export type Bit8 = [
+  Bit, Bit, Bit, Bit, Bit, Bit, Bit, Bit];
+
+/**
  * A 16 bit type, as a tuple.
  */
 export type Bit16 = [

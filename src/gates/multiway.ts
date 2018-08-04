@@ -86,5 +86,5 @@ export const DMux4Way = (
   ...[
     And(sel[1], DMux(a, sel[0])[0]),
     And(sel[1], DMux(a, sel[0])[1]),
-  ] as Bit2,
+  ],
 ] as Bit4);

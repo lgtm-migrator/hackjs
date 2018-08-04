@@ -2,7 +2,7 @@ import { expect } from "chai";
 
 import { Bit8 } from "../hackjs";
 import { ONED_16BIT, ZEROED_16BIT } from "./16bit";
-import { Mux4Way16, Mux8Way16, Or8Way, DMux4Way } from "./multiway";
+import { DMux4Way, Mux4Way16, Mux8Way16, Or8Way } from "./multiway";
 
 const ZEROED_8BIT = [0, 0, 0, 0, 0, 0, 0, 0] as Bit8;
 const ONED_8BIT = [1, 1, 1, 1, 1, 1, 1, 1] as Bit8;

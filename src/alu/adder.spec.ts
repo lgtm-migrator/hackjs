@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { FullAdder, HalfAdder, IAdderResult } from "./adder";
+import { Adder8, FullAdder, HalfAdder, IAdderResult } from "./adder";
 
 describe("HalfAdder", () => {
   it("validates the truth table", () => {
@@ -12,13 +12,27 @@ describe("HalfAdder", () => {
 
 describe("FullAdder", () => {
   it("validates the truth table", () => {
-    expect(FullAdder(0, 0, 0)).to.be.eql({ carry: 0, sum: 0} as IAdderResult);
-    expect(FullAdder(0, 0, 1)).to.be.eql({ carry: 0, sum: 1} as IAdderResult);
-    expect(FullAdder(0, 1, 0)).to.be.eql({ carry: 0, sum: 1} as IAdderResult);
-    expect(FullAdder(0, 1, 1)).to.be.eql({ carry: 1, sum: 0} as IAdderResult);
-    expect(FullAdder(1, 0, 0)).to.be.eql({ carry: 0, sum: 1} as IAdderResult);
-    expect(FullAdder(1, 0, 1)).to.be.eql({ carry: 1, sum: 0} as IAdderResult);
-    expect(FullAdder(1, 1, 0)).to.be.eql({ carry: 1, sum: 0} as IAdderResult);
-    expect(FullAdder(1, 1, 1)).to.be.eql({ carry: 1, sum: 1} as IAdderResult);
+    expect(FullAdder(0, 0, 0)).to.be.eql({ carry: 0, sum: 0 } as IAdderResult);
+    expect(FullAdder(0, 0, 1)).to.be.eql({ carry: 0, sum: 1 } as IAdderResult);
+    expect(FullAdder(0, 1, 0)).to.be.eql({ carry: 0, sum: 1 } as IAdderResult);
+    expect(FullAdder(0, 1, 1)).to.be.eql({ carry: 1, sum: 0 } as IAdderResult);
+    expect(FullAdder(1, 0, 0)).to.be.eql({ carry: 0, sum: 1 } as IAdderResult);
+    expect(FullAdder(1, 0, 1)).to.be.eql({ carry: 1, sum: 0 } as IAdderResult);
+    expect(FullAdder(1, 1, 0)).to.be.eql({ carry: 1, sum: 0 } as IAdderResult);
+    expect(FullAdder(1, 1, 1)).to.be.eql({ carry: 1, sum: 1 } as IAdderResult);
+  });
+});
+
+describe("Adder8", () => {
+  it("calculates some examples", () => {
+    // Add, no carry
+    expect(Adder8([1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0])).to.be.eql([1, 1, 0, 0, 0, 0, 0, 0]);
+    // Add, with a carry
+    expect(Adder8([0, 1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0])).to.be.eql([0, 0, 1, 0, 0, 0, 0, 0]);
+    // Some examples
+    expect(Adder8([1, 1, 0, 1, 0, 0, 0, 0], [0, 1, 0, 0, 1, 0, 0, 0])).to.be.eql([1, 0, 1, 1, 1, 0, 0, 0]);
+    expect(Adder8([0, 1, 1, 0, 1, 0, 1, 0], [0, 0, 1, 0, 1, 1, 0, 0])).to.be.eql([0, 1, 0, 1, 0, 0, 0, 1]);
+    // Ignored overflow below, 9'th bit is 1.
+    expect(Adder8([1, 1, 0, 1, 0, 0, 1, 1], [0, 1, 0, 1, 1, 0, 1, 0])).to.be.eql([1, 0, 1, 0, 0, 1, 0, 0]);
   });
 });

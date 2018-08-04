@@ -15,7 +15,7 @@ describe("Or8Way gate", () => {
   });
 });
 
-describe("Mux4 gate", () => {
+describe("Mux4Way16 gate", () => {
   it("should validate truth 16 bit based on selector", () => {
     expect(Mux4Way16(ONED_16BIT, ZEROED_16BIT, ZEROED_16BIT, ZEROED_16BIT, [0, 0])).to.eql(ONED_16BIT);
     expect(Mux4Way16(ZEROED_16BIT, ONED_16BIT, ZEROED_16BIT, ZEROED_16BIT, [1, 0])).to.eql(ONED_16BIT);

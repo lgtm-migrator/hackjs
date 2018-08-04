@@ -7,7 +7,7 @@ import { Bit } from "../hackjs";
 /**
  * A NAND (not-and) gate, the only gate not implemented as a composite of other gates.
  */
-export const Nand = (a: Bit, b: Bit): Bit => (a && b ? 0 : 1);
+export const Nand = (a: Bit, b: Bit): Bit => (a === 1 && b === 1 ? 0 : 1);
 
 /**
  * A NOT gate, inverts the input.

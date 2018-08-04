@@ -16,6 +16,11 @@ export type Bit2 = [Bit, Bit];
 export type Bit3 = [Bit, Bit, Bit];
 
 /**
+ * A 4 bit type, as a tuple.
+ */
+export type Bit4 = [Bit, Bit, Bit, Bit];
+
+/**
  * A 8 bit type, as a tuple.
  */
 export type Bit8 = [

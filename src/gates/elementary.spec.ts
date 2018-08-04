@@ -114,11 +114,11 @@ describe("Mux8 gate", () => {
   });
 });
 
-describe("Dmux gate", () => {
+describe("DMux gate", () => {
   it("should validate truth table", () => {
-    expect(gates.Dmux(0, 0)).to.eql([0, 0]);
-    expect(gates.Dmux(0, 1)).to.eql([0, 0]);
-    expect(gates.Dmux(1, 0)).to.eql([1, 0]);
-    expect(gates.Dmux(1, 1)).to.eql([0, 1]);
+    expect(gates.DMux(0, 0)).to.eql([0, 0]);
+    expect(gates.DMux(0, 1)).to.eql([0, 0]);
+    expect(gates.DMux(1, 0)).to.eql([1, 0]);
+    expect(gates.DMux(1, 1)).to.eql([0, 1]);
   });
 });

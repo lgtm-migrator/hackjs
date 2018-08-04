@@ -2,7 +2,7 @@ import { expect } from "chai";
 
 import { Bit8 } from "../hackjs";
 import { ONED_16BIT, ZEROED_16BIT } from "./16bit";
-import { Mux4Way16, Mux8Way16, Or8Way } from "./multiway";
+import { Mux4Way16, Mux8Way16, Or8Way, DMux4Way } from "./multiway";
 
 const ZEROED_8BIT = [0, 0, 0, 0, 0, 0, 0, 0] as Bit8;
 const ONED_8BIT = [1, 1, 1, 1, 1, 1, 1, 1] as Bit8;
@@ -58,5 +58,14 @@ describe("Mux8Way16 gate", () => {
     expect(Mux8Way16(_1, _1, _1, _1, _1, _0, _1, _1, [1, 0, 1])).to.eql(_0);
     expect(Mux8Way16(_1, _1, _1, _1, _1, _1, _0, _1, [0, 1, 1])).to.eql(_0);
     expect(Mux8Way16(_1, _1, _1, _1, _1, _1, _1, _0, [1, 1, 1])).to.eql(_0);
+  });
+});
+
+describe("DMux4Way", () => {
+  it("should validate truth table", () => {
+    expect(DMux4Way(1, [0, 0])).to.eql([1, 0, 0, 0]);
+    expect(DMux4Way(1, [1, 0])).to.eql([0, 1, 0, 0]);
+    expect(DMux4Way(1, [0, 1])).to.eql([0, 0, 1, 0]);
+    expect(DMux4Way(1, [1, 1])).to.eql([0, 0, 0, 1]);
   });
 });

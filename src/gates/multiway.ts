@@ -1,5 +1,5 @@
-import { Bit, Bit16, Bit2, Bit3, Bit8 } from "../hackjs";
-import { Mux4, Mux8, Or } from "./elementary";
+import { Bit, Bit16, Bit2, Bit3, Bit4, Bit8 } from "../hackjs";
+import { And, DMux, Mux4, Mux8, Not, Or } from "./elementary";
 
 /**
  * An 8 way or gate, outputs 1 of at least one of the bits are 1.
@@ -71,3 +71,20 @@ export const Mux8Way16 = (
   Mux8(a[14], b[14], c[14], d[14], e[14], f[14], g[14], h[14], sel),
   Mux8(a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], sel),
 ]);
+
+/**
+ * A 4-way demultiplexor.
+ */
+export const DMux4Way = (
+  a: Bit,
+  sel: Bit2,
+): Bit4 => ([
+  ...[
+    And(Not(sel[1]), DMux(a, sel[0])[0]),
+    And(Not(sel[1]), DMux(a, sel[0])[1]),
+  ],
+  ...[
+    And(sel[1], DMux(a, sel[0])[0]),
+    And(sel[1], DMux(a, sel[0])[1]),
+  ] as Bit2,
+] as Bit4);

@@ -98,7 +98,7 @@ export const Mux8 = (a: Bit, b: Bit, c: Bit, d: Bit, e: Bit, f: Bit, g: Bit, h: 
 /**
  * A demultiplexor gate. Outputs the input based on the selector bit.
  */
-export const Dmux = (input: Bit, sel: Bit): [Bit, Bit] => [
-  And(Not(sel), input),
-  And(sel, input),
+export const DMux = (a: Bit, sel: Bit): Bit2 => [
+  And(Not(sel), a),
+  And(sel, a),
 ];

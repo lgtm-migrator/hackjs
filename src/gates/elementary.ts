@@ -2,7 +2,7 @@
  * Implements various elementary logic gates based on one or more input gates and one or more output gate.
  * Everything except the NAND gate is implemented entirely by compositing other gates.
  */
-import { Bit } from "../hackjs";
+import { Bit, Bit2 } from "../hackjs";
 
 /**
  * A NAND (not-and) gate, the only gate not implemented as a composite of other gates.
@@ -60,8 +60,25 @@ export const Xnor = (a: Bit, b: Bit): Bit => Nand(
  * A multiplexor gate. Selects bit a, when the selector is 0, otherwise bit b is outputted.
  */
 export const Mux = (a: Bit, b: Bit, sel: Bit): Bit => Or(
-  And(Not(sel), a),
+  And(
+    Not(sel),
+    a,
+  ),
   And(sel, b),
+);
+
+/**
+ * A 4-way multiplexor.
+ */
+export const Mux4 = (a: Bit, b: Bit, c: Bit, d: Bit, sel: Bit2): Bit => Or(
+  And(
+    Not(sel[1]),
+    Mux(a, b, sel[0]),
+  ),
+  And(
+    sel[1],
+    Mux(c, d, sel[0]),
+  ),
 );
 
 /**

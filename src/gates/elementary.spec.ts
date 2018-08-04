@@ -76,6 +76,21 @@ describe("Mux gate", () => {
   });
 });
 
+describe("Mux4 gate", () => {
+  it("should validate truth bit based on selector", () => {
+    expect(gates.Mux4(1, 0, 0, 0, [0, 0])).to.eq(1);
+    expect(gates.Mux4(0, 1, 0, 0, [1, 0])).to.eq(1);
+    expect(gates.Mux4(0, 0, 1, 0, [0, 1])).to.eq(1);
+    expect(gates.Mux4(0, 0, 0, 1, [1, 1])).to.eq(1);
+  });
+  it("should validate false bit based on selector", () => {
+    expect(gates.Mux4(0, 1, 1, 1, [0, 0])).to.eq(0);
+    expect(gates.Mux4(1, 0, 1, 1, [1, 0])).to.eq(0);
+    expect(gates.Mux4(1, 1, 0, 1, [0, 1])).to.eq(0);
+    expect(gates.Mux4(1, 1, 1, 0, [1, 1])).to.eq(0);
+  });
+});
+
 describe("Dmux gate", () => {
   it("should validate truth table", () => {
     expect(gates.Dmux(0, 0)).to.eql([0, 0]);

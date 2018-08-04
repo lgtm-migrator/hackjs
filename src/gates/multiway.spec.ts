@@ -2,7 +2,7 @@ import { expect } from "chai";
 
 import { Bit8 } from "../hackjs";
 import { ONED_16BIT, ZEROED_16BIT } from "./16bit";
-import { Mux4Way16, Or8Way } from "./multiway";
+import { Mux4Way16, Mux8Way16, Or8Way } from "./multiway";
 
 const ZEROED_8BIT = [0, 0, 0, 0, 0, 0, 0, 0] as Bit8;
 const ONED_8BIT = [1, 1, 1, 1, 1, 1, 1, 1] as Bit8;
@@ -16,16 +16,47 @@ describe("Or8Way gate", () => {
 });
 
 describe("Mux4Way16 gate", () => {
+  // Short hands to make it more readable.
+  const _0 = ZEROED_16BIT;
+  const _1 = ONED_16BIT;
+
   it("should validate truth 16 bit based on selector", () => {
-    expect(Mux4Way16(ONED_16BIT, ZEROED_16BIT, ZEROED_16BIT, ZEROED_16BIT, [0, 0])).to.eql(ONED_16BIT);
-    expect(Mux4Way16(ZEROED_16BIT, ONED_16BIT, ZEROED_16BIT, ZEROED_16BIT, [1, 0])).to.eql(ONED_16BIT);
-    expect(Mux4Way16(ZEROED_16BIT, ZEROED_16BIT, ONED_16BIT, ZEROED_16BIT, [0, 1])).to.eql(ONED_16BIT);
-    expect(Mux4Way16(ZEROED_16BIT, ZEROED_16BIT, ZEROED_16BIT, ONED_16BIT, [1, 1])).to.eql(ONED_16BIT);
+    expect(Mux4Way16(_1, _0, _0, _0, [0, 0])).to.eql(_1);
+    expect(Mux4Way16(_0, _1, _0, _0, [1, 0])).to.eql(_1);
+    expect(Mux4Way16(_0, _0, _1, _0, [0, 1])).to.eql(_1);
+    expect(Mux4Way16(_0, _0, _0, _1, [1, 1])).to.eql(_1);
   });
   it("should validate false 16 bit based on selector", () => {
-    expect(Mux4Way16(ZEROED_16BIT, ONED_16BIT, ONED_16BIT, ONED_16BIT, [0, 0])).to.eql(ZEROED_16BIT);
-    expect(Mux4Way16(ONED_16BIT, ZEROED_16BIT, ONED_16BIT, ONED_16BIT, [1, 0])).to.eql(ZEROED_16BIT);
-    expect(Mux4Way16(ONED_16BIT, ONED_16BIT, ZEROED_16BIT, ONED_16BIT, [0, 1])).to.eql(ZEROED_16BIT);
-    expect(Mux4Way16(ONED_16BIT, ONED_16BIT, ONED_16BIT, ZEROED_16BIT, [1, 1])).to.eql(ZEROED_16BIT);
+    expect(Mux4Way16(_0, _1, _1, _1, [0, 0])).to.eql(_0);
+    expect(Mux4Way16(_1, _0, _1, _1, [1, 0])).to.eql(_0);
+    expect(Mux4Way16(_1, _1, _0, _1, [0, 1])).to.eql(_0);
+    expect(Mux4Way16(_1, _1, _1, _0, [1, 1])).to.eql(_0);
+  });
+});
+
+describe("Mux8Way16 gate", () => {
+  // Short hands to make it more readable.
+  const _0 = ZEROED_16BIT;
+  const _1 = ONED_16BIT;
+
+  it("should validate truth 16 bit based on selector", () => {
+    expect(Mux8Way16(_1, _0, _0, _0, _0, _0, _0, _0, [0, 0, 0])).to.eql(_1);
+    expect(Mux8Way16(_0, _1, _0, _0, _0, _0, _0, _0, [1, 0, 0])).to.eql(_1);
+    expect(Mux8Way16(_0, _0, _1, _0, _0, _0, _0, _0, [0, 1, 0])).to.eql(_1);
+    expect(Mux8Way16(_0, _0, _0, _1, _0, _0, _0, _0, [1, 1, 0])).to.eql(_1);
+    expect(Mux8Way16(_0, _0, _0, _0, _1, _0, _0, _0, [0, 0, 1])).to.eql(_1);
+    expect(Mux8Way16(_0, _0, _0, _0, _0, _1, _0, _0, [1, 0, 1])).to.eql(_1);
+    expect(Mux8Way16(_0, _0, _0, _0, _0, _0, _1, _0, [0, 1, 1])).to.eql(_1);
+    expect(Mux8Way16(_0, _0, _0, _0, _0, _0, _0, _1, [1, 1, 1])).to.eql(_1);
+  });
+  it("should validate false 16 bit based on selector", () => {
+    expect(Mux8Way16(_0, _1, _1, _1, _1, _1, _1, _1, [0, 0, 0])).to.eql(_0);
+    expect(Mux8Way16(_1, _0, _1, _1, _1, _1, _1, _1, [1, 0, 0])).to.eql(_0);
+    expect(Mux8Way16(_1, _1, _0, _1, _1, _1, _1, _1, [0, 1, 0])).to.eql(_0);
+    expect(Mux8Way16(_1, _1, _1, _0, _1, _1, _1, _1, [1, 1, 0])).to.eql(_0);
+    expect(Mux8Way16(_1, _1, _1, _1, _0, _1, _1, _1, [0, 0, 1])).to.eql(_0);
+    expect(Mux8Way16(_1, _1, _1, _1, _1, _0, _1, _1, [1, 0, 1])).to.eql(_0);
+    expect(Mux8Way16(_1, _1, _1, _1, _1, _1, _0, _1, [0, 1, 1])).to.eql(_0);
+    expect(Mux8Way16(_1, _1, _1, _1, _1, _1, _1, _0, [1, 1, 1])).to.eql(_0);
   });
 });

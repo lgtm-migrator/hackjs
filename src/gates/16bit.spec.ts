@@ -1,10 +1,6 @@
 import { expect } from "chai";
 
-import { Bit16 } from "../hackjs";
-import { And16, Mux16, Not16, Or16 } from "./16bit";
-
-const ZEROED_16BIT = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as Bit16;
-const ONED_16BIT = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] as Bit16;
+import { And16, Mux16, Not16, ONED_16BIT, Or16, ZEROED_16BIT } from "./16bit";
 
 describe("Not16 gate", () => {
   it("should reverse all bits", () => {

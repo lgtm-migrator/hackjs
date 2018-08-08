@@ -1,8 +1,7 @@
 import { expect } from "chai";
 
-import { Bit, Bit8 } from "../hackjs";
+import { binaryToBit8 } from "../helpers";
 import { Adder8, FullAdder, HalfAdder, IAdderResult } from "./adder";
-import { binaryToArray } from "../helpers";
 
 describe("HalfAdder", () => {
   it("validates the truth table", () => {
@@ -27,11 +26,11 @@ describe("FullAdder", () => {
 });
 
 describe("Adder8", () => {
-  const cnv8 = binaryToArray as (binary: string) => Bit8;
+  const cnv8 = binaryToBit8;
   it("calculates some examples", () => {
     // Add, no carry
     expect(Adder8([1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0])).to.be.eql([1, 1, 0, 0, 0, 0, 0, 0]);
-    expect(Adder8(cnv8("000000001"), cnv8("00000010"))).to.be.eql(cnv8("00000011"));
+    expect(Adder8(cnv8("00000001"), cnv8("00000010"))).to.be.eql(cnv8("00000011"));
     // Add, with a carry
     expect(Adder8([0, 1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0])).to.be.eql([0, 0, 1, 0, 0, 0, 0, 0]);
     // Some examples

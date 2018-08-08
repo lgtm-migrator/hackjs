@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
-import { binaryToBit8 } from "../helpers";
-import { Adder8, FullAdder, HalfAdder, IAdderResult } from "./adder";
+import { binaryToBit8, binaryToBit16 } from "../helpers";
+import { Adder8, FullAdder, HalfAdder, IAdderResult, Adder16 } from "./adder";
 
 describe("HalfAdder", () => {
   it("validates the truth table", () => {
@@ -26,11 +26,11 @@ describe("FullAdder", () => {
 });
 
 describe("Adder8", () => {
-  const cnv8 = binaryToBit8;
+  const c = binaryToBit8;
   it("calculates some examples", () => {
     // Add, no carry
     expect(Adder8([1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0])).to.be.eql([1, 1, 0, 0, 0, 0, 0, 0]);
-    expect(Adder8(cnv8("00000001"), cnv8("00000010"))).to.be.eql(cnv8("00000011"));
+    expect(Adder8(c("00000001"), c("00000010"))).to.be.eql(c("00000011"));
     // Add, with a carry
     expect(Adder8([0, 1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0])).to.be.eql([0, 0, 1, 0, 0, 0, 0, 0]);
     // Some examples
@@ -38,5 +38,15 @@ describe("Adder8", () => {
     expect(Adder8([0, 1, 1, 0, 1, 0, 1, 0], [0, 0, 1, 0, 1, 1, 0, 0])).to.be.eql([0, 1, 0, 1, 0, 0, 0, 1]);
     // Ignored overflow below, 9'th bit is 1.
     expect(Adder8([1, 1, 0, 1, 0, 0, 1, 1], [0, 1, 0, 1, 1, 0, 1, 0])).to.be.eql([1, 0, 1, 0, 0, 1, 0, 0]);
+  });
+});
+
+describe("Adder16", () => {
+  const c = binaryToBit16;
+  it("calculates an example without a carry", () => {
+    expect(Adder16(c("1010101010101010"), c("0101010101010101"))).to.be.eql(c("1111111111111111"));
+  });
+  it("calculates an example with a carry", () => {
+    expect(Adder16(c("0000000000000001"), c("0000000000000001"))).to.be.eql(c("0000000000000010"));
   });
 });

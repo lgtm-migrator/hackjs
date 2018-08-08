@@ -1,5 +1,5 @@
 import { And, Or, Xor } from "../gates";
-import { Bit, Bit8 } from "../hackjs";
+import { Bit, Bit8, Bit16 } from "../hackjs";
 
 export interface IAdderResult {
   sum: Bit;
@@ -54,5 +54,46 @@ export const Adder8 = (a: Bit8, b: Bit8): Bit8 => {
     res5.sum,
     res6.sum,
     res7.sum,
+  ];
+};
+
+/**
+ * An 8-bit adder, adds two bytes together and returns the sum.
+ * Ignoring any overflows.
+ */
+export const Adder16 = (a: Bit16, b: Bit16): Bit16 => {
+  const res0 = HalfAdder(a[0], b[0]);
+  const res1 = FullAdder(a[1], b[1], res0.carry);
+  const res2 = FullAdder(a[2], b[2], res1.carry);
+  const res3 = FullAdder(a[3], b[3], res2.carry);
+  const res4 = FullAdder(a[4], b[4], res3.carry);
+  const res5 = FullAdder(a[5], b[5], res4.carry);
+  const res6 = FullAdder(a[6], b[6], res5.carry);
+  const res7 = FullAdder(a[7], b[7], res6.carry);
+  const res8 = FullAdder(a[8], b[8], res7.carry);
+  const res9 = FullAdder(a[9], b[9], res8.carry);
+  const res10 = FullAdder(a[10], b[10], res9.carry);
+  const res11 = FullAdder(a[11], b[11], res10.carry);
+  const res12 = FullAdder(a[12], b[12], res11.carry);
+  const res13 = FullAdder(a[13], b[13], res12.carry);
+  const res14 = FullAdder(a[14], b[14], res13.carry);
+  const res15 = FullAdder(a[15], b[15], res14.carry);
+  return [
+    res0.sum,
+    res1.sum,
+    res2.sum,
+    res3.sum,
+    res4.sum,
+    res5.sum,
+    res6.sum,
+    res7.sum,
+    res8.sum,
+    res9.sum,
+    res10.sum,
+    res11.sum,
+    res12.sum,
+    res13.sum,
+    res14.sum,
+    res15.sum,
   ];
 };

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
-import { binaryToBit8, binaryToBit16 } from "../helpers";
-import { Adder8, FullAdder, HalfAdder, IAdderResult, Adder16 } from "./adder";
+import { binaryToBit16, binaryToBit8 } from "../helpers";
+import { Adder16, Adder8, FullAdder, HalfAdder, IAdderResult } from "./adder";
 
 describe("HalfAdder", () => {
   it("validates the truth table", () => {

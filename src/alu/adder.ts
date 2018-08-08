@@ -1,5 +1,5 @@
 import { And, Or, Xor } from "../gates";
-import { Bit, Bit8, Bit16 } from "../hackjs";
+import { Bit, Bit16, Bit8 } from "../hackjs";
 
 export interface IAdderResult {
   sum: Bit;

@@ -1,5 +1,5 @@
-import { And16, Not, Not16, Or16, Or8Way, Or } from "../gates";
-import { Bit, Bit16, IALUOutput, Bit8 } from "../hackjs";
+import { And16, Not, Not16, Or, Or16, Or8Way } from "../gates";
+import { Bit, Bit16, Bit8, IALUOutput } from "../hackjs";
 import { BIT16_FALSE, bitToBit16 } from "../helpers";
 import { Adder16 } from "./adder";
 

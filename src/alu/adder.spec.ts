@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
 import { binaryToBit16, binaryToBit8 } from "../helpers";
-import { Adder16, Adder8, FullAdder, HalfAdder, IAdderResult } from "./adder";
+import { Adder16, Adder8, FullAdder, HalfAdder, IAdderResult, Inc16 } from "./adder";
 
 describe("HalfAdder", () => {
   it("validates the truth table", () => {
@@ -48,5 +48,17 @@ describe("Adder16", () => {
   });
   it("calculates an example with a carry", () => {
     expect(Adder16(c("0000000000000001"), c("0000000000000001"))).to.be.eql(c("0000000000000010"));
+  });
+});
+
+describe("Inc16", () => {
+  const c = binaryToBit16;
+  it("increments some values by 1", () => {
+    // Test some addition.
+    expect(Inc16(c("0000000000000000"))).to.be.eql(c("0000000000000001"));
+    // Test overflow.
+    expect(Inc16(c("1111111111111111"))).to.be.eql(c("0000000000000000"));
+    // Test carry bit addition.
+    expect(Inc16(c("0000000000000001"))).to.be.eql(c("0000000000000010"));
   });
 });

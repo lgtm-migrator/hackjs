@@ -1,5 +1,6 @@
 import { And, Or, Xor } from "../gates";
 import { Bit, Bit16, Bit8 } from "../hackjs";
+import { BIT16_TRUE } from "../helpers";
 
 export interface IAdderResult {
   sum: Bit;
@@ -97,3 +98,11 @@ export const Adder16 = (a: Bit16, b: Bit16): Bit16 => {
     res15.sum,
   ];
 };
+
+/**
+ * A 16-bit incrementor.
+ * Outputs the input + 1.
+ */
+export const Inc16 = (
+  input: Bit16,
+): Bit16 => Adder16(input, BIT16_TRUE);

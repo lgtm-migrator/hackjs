@@ -1,5 +1,5 @@
-import { And16, Not, Not16, Or16 } from "../gates";
-import { Bit, Bit16, IALUOutput } from "../hackjs";
+import { And16, Not, Not16, Or16, Or8Way, Or } from "../gates";
+import { Bit, Bit16, IALUOutput, Bit8 } from "../hackjs";
 import { BIT16_FALSE, bitToBit16 } from "../helpers";
 import { Adder16 } from "./adder";
 
@@ -82,8 +82,13 @@ export const ALU = (
     ),
   );
   return {
-    ng: 0,  // TODO
+    ng: out[15],
     out,
-    zr: 0,  // TODO
+    zr: Not(
+      Or(
+        Or8Way(out.slice(0, 8) as Bit8),
+        Or8Way(out.slice(8, 16) as Bit8),
+      ),
+    ),
   };
 };

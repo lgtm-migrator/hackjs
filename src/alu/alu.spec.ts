@@ -115,3 +115,23 @@ describe("ALU (output only)", () => {
     expect(ALU(c("1010101010101010"), c("1100110011001100"), 0, 1, 0, 1, 0, 1).out).to.be.eql(c("1110111011101110"));
   });
 });
+
+describe("ALU output bits validate", () => {
+  const c = binaryToBit16;
+
+  it("0 output, zr bit is 1, ng bit is 0", () => {
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 0, 1, 0, 1, 0).out).to.be.eql(BIT16_FALSE);
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 0, 1, 0, 1, 0).zr).to.be.eq(1);
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 0, 1, 0, 1, 0).ng).to.be.eq(0);
+  });
+  it("1 output, zr bit is 0, ng bit is 0", () => {
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 1, 1, 1, 1, 1).out).to.be.eql(BIT16_TRUE);
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 1, 1, 1, 1, 1).zr).to.be.eq(0);
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 1, 1, 1, 1, 1).ng).to.be.eq(0);
+  });
+  it("-1 output, zr bit is 0, ng bit is 1", () => {
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 1, 1, 0, 1, 0).out).to.be.eql(c("1111111111111111"));
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 1, 1, 0, 1, 0).zr).to.be.eq(0);
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 1, 1, 1, 0, 1, 0).ng).to.be.eq(1);
+  });
+});

@@ -2,6 +2,7 @@ import { expect } from "chai";
 import { Not16, ONED_16BIT, ZEROED_16BIT } from "../gates";
 import { binaryToBit16, BIT16_FALSE, BIT16_TRUE } from "../helpers";
 import { ALU, Operator, Preset } from "./alu";
+import { Adder16 } from "./adder";
 
 describe("Preset", () => {
   const c = binaryToBit16;
@@ -31,7 +32,7 @@ describe("Operator", () => {
   });
 });
 
-describe("ALU", () => {
+describe("ALU (output only)", () => {
   const c = binaryToBit16;
 
   it("zero output from flags", () => {
@@ -77,5 +78,40 @@ describe("ALU", () => {
     const negativeEight = c("1111111111111000");
     expect(ALU(ZEROED_16BIT, eight, 1, 1, 0, 0, 1, 1).out).to.be.eql(negativeEight);
     expect(ALU(ONED_16BIT, eight, 1, 1, 0, 0, 1, 1).out).to.be.eql(negativeEight);
+  });
+  it("returns x + 1", () => {
+    expect(ALU(c("0000000000000001"), ZEROED_16BIT, 0, 1, 1, 1, 1, 1).out).to.be.eql(c("0000000000000010"));
+    expect(ALU(c("0000000000000001"), ONED_16BIT, 0, 1, 1, 1, 1, 1).out).to.be.eql(c("0000000000000010"));
+  });
+  it("returns y + 1", () => {
+    expect(ALU(ZEROED_16BIT, c("0000000000000001"), 1, 1, 0, 1, 1, 1).out).to.be.eql(c("0000000000000010"));
+    expect(ALU(ONED_16BIT, c("0000000000000001"), 1, 1, 0, 1, 1, 1).out).to.be.eql(c("0000000000000010"));
+  });
+  it("returns x - 1", () => {
+    expect(ALU(c("0000000000000010"), ZEROED_16BIT, 0, 0, 1, 1, 1, 0).out).to.be.eql(c("0000000000000001"));
+    expect(ALU(c("0000000000000010"), ONED_16BIT, 0, 0, 1, 1, 1, 0).out).to.be.eql(c("0000000000000001"));
+  });
+  it("returns y - 1", () => {
+    // 2 - 1 = 1
+    expect(ALU(ZEROED_16BIT, c("0000000000000010"), 1, 1, 0, 0, 1, 0).out).to.be.eql(c("0000000000000001"));
+    expect(ALU(ONED_16BIT, c("0000000000000010"), 1, 1, 0, 0, 1, 0).out).to.be.eql(c("0000000000000001"));
+  });
+  it("returns x + y", () => {
+    // 1 + 1 = 2
+    expect(ALU(BIT16_TRUE, BIT16_TRUE, 0, 0, 0, 0, 1, 0).out).to.be.eql(c("0000000000000010"));
+  });
+  it("returns x - y", () => {
+    // 2 - 1 = 1
+    expect(ALU(c("0000000000000010"), c("0000000000000001"), 0, 1, 0, 0, 1, 1).out).to.be.eql(c("0000000000000001"));
+  });
+  it("returns y - x", () => {
+    // 2 - 1 = 1
+    expect(ALU(c("0000000000000001"), c("0000000000000010"), 0, 0, 0, 1, 1, 1).out).to.be.eql(c("0000000000000001"));
+  });
+  it("returns x & b", () => {
+    expect(ALU(c("1010101010101010"), c("1100110011001100"), 0, 0, 0, 0, 0, 0).out).to.be.eql(c("1000100010001000"));
+  });
+  it("returns x | b", () => {
+    expect(ALU(c("1010101010101010"), c("1100110011001100"), 0, 1, 0, 1, 0, 1).out).to.be.eql(c("1110111011101110"));
   });
 });

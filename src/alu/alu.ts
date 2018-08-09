@@ -64,9 +64,11 @@ export const ALU = (
   x: Bit16, y: Bit16,
   zx: Bit, nx: Bit, zy: Bit, ny: Bit, f: Bit, no: Bit,
 ): IAluOutput => {
-  const presetX = Preset(x, zx, nx);
-  const presetY = Preset(y, zy, ny);
-  const operatorOut = Operator(presetX, presetY, f);
+  const operatorOut = Operator(
+    Preset(x, zx, nx),
+    Preset(y, zy, ny),
+    f,
+  );
   const out = Or16(
     And16(
       bitToBit16(Not(no)),

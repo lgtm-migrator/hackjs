@@ -34,7 +34,7 @@ export type Bit16 = [
   Bit, Bit, Bit, Bit, Bit, Bit, Bit, Bit];
 
 
-export interface IAluOutput {
+export interface IALUOutput {
   /**
    * The output of an ALU computation.
    */

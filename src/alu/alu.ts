@@ -1,5 +1,5 @@
 import { And16, Not, Not16, Or16 } from "../gates";
-import { Bit, Bit16, IAluOutput } from "../hackjs";
+import { Bit, Bit16, IALUOutput } from "../hackjs";
 import { BIT16_FALSE, bitToBit16 } from "../helpers";
 import { Adder16 } from "./adder";
 
@@ -63,7 +63,7 @@ export const Operator = (x: Bit16, y: Bit16, f: Bit): Bit16 => Or16(
 export const ALU = (
   x: Bit16, y: Bit16,
   zx: Bit, nx: Bit, zy: Bit, ny: Bit, f: Bit, no: Bit,
-): IAluOutput => {
+): IALUOutput => {
   const operatorOut = Operator(
     Preset(x, zx, nx),
     Preset(y, zy, ny),

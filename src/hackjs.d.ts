@@ -32,3 +32,19 @@ export type Bit8 = [
 export type Bit16 = [
   Bit, Bit, Bit, Bit, Bit, Bit, Bit, Bit,
   Bit, Bit, Bit, Bit, Bit, Bit, Bit, Bit];
+
+
+export interface IAluOutput {
+  /**
+   * The output of an ALU computation.
+   */
+  out: Bit16;
+  /**
+   * If the output is 0, then zr is 1.
+   */
+  zr: Bit;
+  /**
+   * If the output is negative (if the MSB is 1), then ng equals 1.
+   */
+  ng: Bit;
+}

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import { binaryToArray, binaryToBit16, binaryToBit8 } from "./helpers";
+import { binaryToArray, binaryToBit16, binaryToBit8, bitToBit16 } from "./helpers";
 
 describe("binaryToArray", () => {
   it("fails with a TypeError", () => {
@@ -20,5 +20,15 @@ describe("binaryToBit8", () => {
 describe("binaryToBit16", () => {
   it("should convert a binary string to an Bit16 object", () => {
     expect(binaryToBit16("1010101010101010")).to.be.eql([0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]);
+  });
+});
+
+describe("bitToBit16", () => {
+  const c = binaryToBit16;
+  it("should convert 0 to all zeroes", () => {
+    expect(bitToBit16(0)).to.be.eql(c("0000000000000000"));
+  });
+  it("should convert 1 to 16 bit 1", () => {
+    expect(bitToBit16(1)).to.be.eql(c("1111111111111111"));
   });
 });

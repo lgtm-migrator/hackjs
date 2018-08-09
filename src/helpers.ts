@@ -13,9 +13,17 @@ export const binaryToArray = (binary: string, length: number): Bit[] => {
     .reverse();
 };
 
-export const binaryToBit8 = (binary: string): Bit8 =>  binaryToArray(binary, 8) as Bit8;
+export const binaryToBit8 = (binary: string): Bit8 => binaryToArray(binary, 8) as Bit8;
 
-export const binaryToBit16 = (binary: string): Bit16 =>  binaryToArray(binary, 16) as Bit16;
+export const binaryToBit16 = (binary: string): Bit16 => binaryToArray(binary, 16) as Bit16;
 
 export const BIT16_FALSE = binaryToBit16("0000000000000000");
 export const BIT16_TRUE = binaryToBit16("0000000000000001");
+
+/**
+ * Converts a bit to a bit16.
+ */
+export const bitToBit16 = (input: Bit): Bit16 => ([
+  input, input, input, input, input, input, input, input,
+  input, input, input, input, input, input, input, input,
+]);

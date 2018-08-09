@@ -4,7 +4,7 @@
   "description": "An implementation of the Hack computer, based on nand2tetris",
   "private": true,
   "scripts": {
-    "test": "nyc mocha -r ts-node/register src/**/*.spec.ts",
+    "test": "nyc mocha -r ts-node/register src/**/*.spec.ts src/*.spec.ts",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {

@@ -50,3 +50,15 @@ export interface IALUOutput {
    */
   ng: Bit;
 }
+
+
+export interface SRFFOutput {
+  /**
+   * Q: The output.
+   */
+  q: Bit;
+  /**
+   * Inverse Q, the inverse output.
+   */
+  nq: Bit;
+}

@@ -52,7 +52,7 @@ export interface IALUOutput {
 }
 
 
-export interface SRFFOutput {
+export interface SRLatchOutput {
   /**
    * Q: The output.
    */

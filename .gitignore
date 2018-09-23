@@ -59,4 +59,5 @@ htmlcov
 *.sqlite3
 
 node_modules
-.nyc_output
+coverage
+yarn*.log

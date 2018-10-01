@@ -37,7 +37,7 @@ describe("latches", () => {
 
       // Set to invalid output (both set and reset bits).
       output = SRLatch(1, 1, output);
-      expect(output).toEqual({ q: 0, nq: 1 });
+      expect(output).toEqual({ q: 0, nq: 0 });
     });
   });
 

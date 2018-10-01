@@ -1,5 +1,5 @@
 import { SRFlipFlopOutput } from "../hackjs";
-import { SRFlipFlop, GatedDFlipFlop, GatedDFlipFlopTick } from "./flipflop";
+import { GatedDFlipFlop, GatedDFlipFlopTick, SRFlipFlop } from "./flipflop";
 
 describe("latches", () => {
   describe("SRLatch", () => {

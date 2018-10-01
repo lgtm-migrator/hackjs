@@ -1,5 +1,4 @@
 {
   "editor.tabSize": 2,
-  "prettier.tslintIntegration": true,
-  "editor.formatOnSave": true
+  "prettier.tslintIntegration": true
 }

@@ -1,8 +1,7 @@
 import { SRFlipFlopOutput } from "../hackjs";
-import { SRFlipFlop } from "./flipflop";
+import { SRFlipFlop, GatedDFlipFlop, GatedDFlipFlopTick } from "./flipflop";
 
 describe("latches", () => {
-
   describe("SRLatch", () => {
     it("can hold state", () => {
       expect(SRFlipFlop(0, 0, { q: 0, nq: 1 })).toEqual({ q: 0, nq: 1 });
@@ -41,4 +40,32 @@ describe("latches", () => {
     });
   });
 
+  describe("GatedDFlipFlopTick", () => {
+    it("ignores the data when the clock is low", () => {
+      {
+        const result = GatedDFlipFlopTick(0, 0, { q: 0, nq: 1 });
+        expect(result).toEqual({ q: 0, nq: 1 });
+      }
+      {
+        const result = GatedDFlipFlopTick(0, 0, { q: 1, nq: 0 });
+        expect(result).toEqual({ q: 1, nq: 0 });
+      }
+    });
+  });
+
+  describe("GatedDFlipFlop", () => {
+    it("should send the data input to the output.", () => {
+      expect(GatedDFlipFlop(0, 1, { q: 1, nq: 0 })).toEqual({ q: 0, nq: 1 });
+      expect(GatedDFlipFlop(0, 1, { q: 0, nq: 1 })).toEqual({ q: 0, nq: 1 });
+      expect(GatedDFlipFlop(1, 1, { q: 1, nq: 0 })).toEqual({ q: 1, nq: 0 });
+      expect(GatedDFlipFlop(1, 1, { q: 0, nq: 1 })).toEqual({ q: 1, nq: 0 });
+    });
+
+    it("should hold the value, when the clock is low.", () => {
+      expect(GatedDFlipFlop(0, 0, { q: 1, nq: 0 })).toEqual({ q: 1, nq: 0 });
+      expect(GatedDFlipFlop(0, 0, { q: 0, nq: 1 })).toEqual({ q: 0, nq: 1 });
+      expect(GatedDFlipFlop(1, 0, { q: 1, nq: 0 })).toEqual({ q: 1, nq: 0 });
+      expect(GatedDFlipFlop(1, 0, { q: 0, nq: 1 })).toEqual({ q: 0, nq: 1 });
+    });
+  });
 });

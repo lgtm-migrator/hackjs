@@ -1,4 +1,4 @@
-import { Nor } from "../gates";
+import { And, Nor, Not } from "../gates";
 import { Bit, SRFlipFlopOutput } from "../hackjs";
 
 /**
@@ -14,15 +14,35 @@ import { Bit, SRFlipFlopOutput } from "../hackjs";
  * @returns The next output in the cycle.
  */
 export const SRFlipFlop = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput =>
-  SRFlipFlopSingle(s, r, SRFlipFlopSingle(s, r, output));
+  SRFlipFlopTick(s, r, SRFlipFlopTick(s, r, output));
 
-const SRFlipFlopSingle = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput => ({
+const SRFlipFlopTick = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput => ({
   nq: Nor(
     s,
     output.q,
   ),
   q: Nor(
     r,
+    output.nq,
+  ),
+});
+
+export const GatedDFlipFlop = (d: Bit, clock: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput =>
+  GatedDFlipFlopTick(d, clock, GatedDFlipFlopTick(d, clock, output));
+
+export const GatedDFlipFlopTick = (d: Bit, clock: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput => ({
+  nq: Nor(
+    And(
+      clock,
+      d,
+    ),
+    output.q,
+  ),
+  q: Nor(
+    And(
+      clock,
+      Not(d),
+    ),
     output.nq,
   ),
 });

@@ -1,5 +1,5 @@
 import { Nor } from "../gates";
-import { Bit, SRLatchOutput } from "../hackjs";
+import { Bit, SRFlipFlopOutput } from "../hackjs";
 
 /**
  * An SR latch/flip-flop circuit.
@@ -13,10 +13,10 @@ import { Bit, SRLatchOutput } from "../hackjs";
  * @param output The previous output.
  * @returns The next output in the cycle.
  */
-export const SRLatch = (s: Bit, r: Bit, output: SRLatchOutput): SRLatchOutput =>
-  SRLatchSingle(s, r, SRLatchSingle(s, r, output));
+export const SRFlipFlop = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput =>
+  SRFlipFlopSingle(s, r, SRFlipFlopSingle(s, r, output));
 
-const SRLatchSingle = (s: Bit, r: Bit, output: SRLatchOutput): SRLatchOutput => ({
+const SRFlipFlopSingle = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput => ({
   nq: Nor(
     s,
     output.q,

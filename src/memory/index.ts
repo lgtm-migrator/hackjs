@@ -1,1 +1,1 @@
-export * from "./latch";
+export * from "./flipflop";

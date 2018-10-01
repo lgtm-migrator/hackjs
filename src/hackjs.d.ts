@@ -52,7 +52,7 @@ export interface IALUOutput {
 }
 
 
-export interface SRLatchOutput {
+export interface SRFlipFlopOutput {
   /**
    * Q: The output.
    */

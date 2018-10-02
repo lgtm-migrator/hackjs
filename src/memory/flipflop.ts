@@ -27,6 +27,13 @@ const SRFlipFlopTick = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOut
   ),
 });
 
+/**
+ * A gated data flip-flip.
+ *
+ * @param d The data input
+ * @param clock The clock, either high or low.
+ * @param output The output, as both q and !q (nq).
+ */
 export const GatedDFlipFlop = (d: Bit, clock: Bit, output: SRFlipFlopOutput): SRFlipFlopOutput =>
   GatedDFlipFlopTick(d, clock, GatedDFlipFlopTick(d, clock, output));
 

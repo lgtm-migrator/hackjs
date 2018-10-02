@@ -1,4 +1,5 @@
-import { Bit, Bit16, Bit8 } from "./hackjs";
+import { Not } from "./gates";
+import { Bit, Bit16, Bit8, SRFlipFlopOutput } from "./hackjs";
 
 /**
  * Converts a binary string to a bit array.
@@ -27,3 +28,8 @@ export const bitToBit16 = (input: Bit): Bit16 => ([
   input, input, input, input, input, input, input, input,
   input, input, input, input, input, input, input, input,
 ]);
+
+export const bitToSRFlipFlopOutput = (b: Bit): SRFlipFlopOutput => ({
+  nq: Not(b),
+  q: b,
+});

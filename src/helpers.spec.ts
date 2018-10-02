@@ -1,4 +1,4 @@
-import { binaryToArray, binaryToBit16, binaryToBit8, bitToBit16 } from "./helpers";
+import { binaryToArray, binaryToBit16, binaryToBit8, bitToBit16, bitToSRFlipFlopOutput } from "./helpers";
 
 describe("Helper functions", () => {
 
@@ -33,4 +33,10 @@ describe("Helper functions", () => {
     });
   });
 
+  describe("bitToSRFlipFlopOutput", () => {
+    it("should convert the 2 cases correctly", () => {
+      expect(bitToSRFlipFlopOutput(0)).toEqual({ q: 0, nq: 1 });
+      expect(bitToSRFlipFlopOutput(1)).toEqual({ q: 1, nq: 0 });
+    });
+  });
 });

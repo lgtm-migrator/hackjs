@@ -30,6 +30,9 @@ const SRFlipFlopTick = (s: Bit, r: Bit, output: SRFlipFlopOutput): SRFlipFlopOut
 /**
  * A gated data flip-flip.
  *
+ * Outputs whatever is container (the output in the input), if the clock is high.
+ * Otherwise sets a new state.
+ *
  * @param d The data input
  * @param clock The clock, either high or low.
  * @param output The output, as both q and !q (nq).

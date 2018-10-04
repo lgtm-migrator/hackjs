@@ -14,7 +14,7 @@ import { GatedDFlipFlop } from "./flipflop";
  * Call the function to get a register, then call the register with an input
  * and a load bit to receive an output.
  */
-export const Register = () => {
+export const BitRegister = () => {
   let output: Bit = 0;
 
   return (input: Bit, load: Bit): Bit => {

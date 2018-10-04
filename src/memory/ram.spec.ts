@@ -1,9 +1,9 @@
-import { Register } from "./ram";
+import { BitRegister } from "./ram";
 
 describe("ram", () => {
-  describe("Register", () => {
+  describe("BitRegister", () => {
     it("can load some data, keep it, and return it later", () => {
-      const reg = Register();
+      const reg = BitRegister();
 
       // Store a bit, with a bit load bit..
       expect(reg(1, 1)).toEqual(1);

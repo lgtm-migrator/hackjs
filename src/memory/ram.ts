@@ -27,6 +27,12 @@ export const BitRegister = () => {
   };
 };
 
+/**
+ * A 16-bit register.
+ *
+ * Call to build a register, then call the register with 16-bit input and a
+ * load bit to utilize it.
+ */
 export const Register = () => {
   // Assemble 16 registers.
   const output = [...Array(16)].map(() => BitRegister());

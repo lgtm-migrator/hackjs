@@ -31,7 +31,7 @@ export const BitRegister = () => {
  * A 16-bit register.
  *
  * Call to build a register, then call the register with 16-bit input and a
- * load bit to utilize it.
+ * load bit to utilize.
  */
 export const Register = () => {
   // Assemble 16 registers.
@@ -39,6 +39,6 @@ export const Register = () => {
 
   return (input: Bit16, load: Bit): Bit16 => {
     // Call all the registers with each input and the load bit.
-    return (output.map((reg, idx) => reg(input[idx], load)) as Bit16);
+    return output.map((reg, idx) => reg(input[idx], load)) as Bit16;
   };
 };

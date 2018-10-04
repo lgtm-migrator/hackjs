@@ -1,5 +1,5 @@
+import { BIT16_FALSE, BIT16_TRUE } from "../helpers";
 import { BitRegister, Register } from "./ram";
-import { BIT16_TRUE, BIT16_FALSE } from "../helpers";
 
 describe("ram", () => {
   describe("BitRegister", () => {
@@ -40,5 +40,5 @@ describe("ram", () => {
       expect(reg(BIT16_TRUE, 0)).toEqual(BIT16_FALSE);
       expect(reg(BIT16_FALSE, 0)).toEqual(BIT16_FALSE);
     });
-  })
+  });
 });

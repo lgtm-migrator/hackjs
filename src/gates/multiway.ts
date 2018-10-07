@@ -2,7 +2,7 @@ import { Bit, Bit16, Bit2, Bit3, Bit4, Bit8 } from "../hackjs";
 import { And, DMux, Mux4, Mux8, Not, Or } from "./elementary";
 
 /**
- * An 8 way or gate, outputs 1 of at least one of the bits are 1.
+ * An 8 way or gate, outputs 1 if at least one of the bits are 1.
  */
 export const Or8Way = (input: Bit8): Bit => Or(
   input[0], Or(
@@ -78,13 +78,37 @@ export const Mux8Way16 = (
 export const DMux4Way = (
   a: Bit,
   sel: Bit2,
-): Bit4 => ([
-  ...[
-    And(Not(sel[1]), DMux(a, sel[0])[0]),
-    And(Not(sel[1]), DMux(a, sel[0])[1]),
-  ],
-  ...[
-    And(sel[1], DMux(a, sel[0])[0]),
-    And(sel[1], DMux(a, sel[0])[1]),
-  ],
-] as Bit4);
+): Bit4 => {
+  const subOutput = DMux(a, sel[0]);
+  return [
+    ...[
+      And(Not(sel[1]), subOutput[0]),
+      And(Not(sel[1]), subOutput[1]),
+    ],
+    ...[
+      And(sel[1], subOutput[0]),
+      And(sel[1], subOutput[1]),
+    ],
+  ] as Bit4;
+};
+
+/**
+ * A 8-way demultiplexor.
+ */
+export const DMux8Way = (input: Bit, sel: Bit3): Bit8 => {
+  const subOut = DMux4Way(input, sel.slice(0, 2) as Bit2);
+  return [
+    ...[
+      And(Not(sel[2]), subOut[0]),
+      And(Not(sel[2]), subOut[1]),
+      And(Not(sel[2]), subOut[2]),
+      And(Not(sel[2]), subOut[3]),
+    ],
+    ...[
+      And(sel[2], subOut[0]),
+      And(sel[2], subOut[1]),
+      And(sel[2], subOut[2]),
+      And(sel[2], subOut[3]),
+    ],
+] as Bit8;
+};

@@ -1,6 +1,6 @@
 import { Bit8 } from "../hackjs";
 import { ONED_16BIT, ZEROED_16BIT } from "./16bit";
-import { DMux4Way, Mux4Way16, Mux8Way16, Or8Way } from "./multiway";
+import { DMux4Way, DMux8Way, Mux4Way16, Mux8Way16, Or8Way } from "./multiway";
 
 describe("Multiway gates", () => {
 
@@ -70,4 +70,16 @@ describe("Multiway gates", () => {
     });
   });
 
+  describe("DMUX8Way", () => {
+    it("should validate truth table", () => {
+      expect(DMux8Way(1, [0, 0, 0])).toEqual([1, 0, 0, 0, 0, 0, 0, 0]);
+      expect(DMux8Way(1, [1, 0, 0])).toEqual([0, 1, 0, 0, 0, 0, 0, 0]);
+      expect(DMux8Way(1, [0, 1, 0])).toEqual([0, 0, 1, 0, 0, 0, 0, 0]);
+      expect(DMux8Way(1, [1, 1, 0])).toEqual([0, 0, 0, 1, 0, 0, 0, 0]);
+      expect(DMux8Way(1, [0, 0, 1])).toEqual([0, 0, 0, 0, 1, 0, 0, 0]);
+      expect(DMux8Way(1, [1, 0, 1])).toEqual([0, 0, 0, 0, 0, 1, 0, 0]);
+      expect(DMux8Way(1, [0, 1, 1])).toEqual([0, 0, 0, 0, 0, 0, 1, 0]);
+      expect(DMux8Way(1, [1, 1, 1])).toEqual([0, 0, 0, 0, 0, 0, 0, 1]);
+    });
+  });
 });

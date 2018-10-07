@@ -52,12 +52,12 @@ export const Ram8 = () => {
   const memory = [...Array(8)].map(() => Register());
 
   return (input: Bit16, address: Bit3, load: Bit): Bit16 => {
-    // Start by demuxifying the load bit for each register.
+    // Start by demuxifying the load bits for each register.
     const loads = DMux8Way(load, address);
     // Call all the registers with the demuxified load bit.
     const output = memory.map((register, idx) =>
       register(input, loads[idx]));
-    // Multiplex the output to make sure the correct addres is returned.
+    // Multiplex the output to make sure the correct address is returned.
     return Mux8Way16(
       output[0], output[1], output[2], output[3],
       output[4], output[5], output[6], output[7],

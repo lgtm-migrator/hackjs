@@ -1,5 +1,5 @@
-import { BIT16_FALSE, BIT16_TRUE } from "../helpers";
-import { BitRegister, Register } from "./ram";
+import { BIT16_FALSE, BIT16_TRUE, binaryToBit16 } from "../helpers";
+import { BitRegister, Ram8, Register } from "./ram";
 
 describe("ram", () => {
   describe("BitRegister", () => {
@@ -39,6 +39,26 @@ describe("ram", () => {
       // Test that the new state is still kept, while the load bit is low.
       expect(reg(BIT16_TRUE, 0)).toEqual(BIT16_FALSE);
       expect(reg(BIT16_FALSE, 0)).toEqual(BIT16_FALSE);
+    });
+  });
+
+  describe("RAM8", () => {
+    it("should load and store the various addresses independently", () => {
+      const _ = binaryToBit16;
+      const uneven = _("1010101010101010");
+      const mem = Ram8();
+
+      // Check the initial state of the registers.
+      expect(mem(BIT16_TRUE, [1, 0, 0], 0)).toEqual(BIT16_FALSE);
+
+      // Load something on a few different addresses, validate that the same
+      // values can be fetched again.
+      expect(mem(BIT16_TRUE, [0, 1, 0], 1)).toEqual(BIT16_TRUE);
+      expect(mem(uneven, [1, 0, 0], 1)).toEqual(uneven);
+
+      // Check the values.
+      expect(mem(BIT16_FALSE, [0, 1, 0], 0)).toEqual(BIT16_TRUE);
+      expect(mem(uneven, [1, 0, 0], 0)).toEqual(uneven);
     });
   });
 });

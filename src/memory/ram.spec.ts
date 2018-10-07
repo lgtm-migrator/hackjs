@@ -1,4 +1,4 @@
-import { BIT16_FALSE, BIT16_TRUE, binaryToBit16 } from "../helpers";
+import { binaryToBit16, BIT16_FALSE, BIT16_TRUE } from "../helpers";
 import { BitRegister, Ram8, Register } from "./ram";
 
 describe("ram", () => {

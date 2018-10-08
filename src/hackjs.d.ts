@@ -30,6 +30,17 @@ export type Bit8 = [
 
 export type Bit9 = [Bit, Bit, Bit, Bit, Bit, Bit, Bit, Bit, Bit];
 
+export type Bit12 = [
+  Bit, Bit, Bit, Bit,
+  Bit, Bit, Bit, Bit,
+  Bit, Bit, Bit, Bit];
+
+export type Bit15 = [
+  Bit, Bit, Bit, Bit, Bit,
+  Bit, Bit, Bit, Bit, Bit,
+  Bit, Bit, Bit, Bit, Bit,
+];
+
 /**
  * A 16 bit type, as a tuple.
  */

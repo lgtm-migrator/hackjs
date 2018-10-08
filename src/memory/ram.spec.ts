@@ -1,5 +1,5 @@
 import { binaryToBit16, BIT16_FALSE, BIT16_TRUE } from "../helpers";
-import { BitRegister, Ram512, Ram64, Ram8, Register } from "./ram";
+import { BitRegister, Ram16K, Ram4K, Ram512, Ram64, Ram8, Register } from "./ram";
 
 describe("ram", () => {
   describe("BitRegister", () => {
@@ -99,6 +99,46 @@ describe("ram", () => {
       // Check the values.
       expect(mem(BIT16_FALSE, [0, 0, 0, 0, 0, 0, 1, 0, 0], 0)).toEqual(BIT16_TRUE);
       expect(mem(uneven, [0, 0, 0, 1, 0, 0, 0, 0, 0], 0)).toEqual(uneven);
+    });
+  });
+
+  describe("RAM512", () => {
+    it("should load and store the various addresses independently", () => {
+      const _ = binaryToBit16;
+      const uneven = _("1010101010101010");
+      const mem = Ram4K();
+
+      // Check the initial state of the registers.
+      expect(mem(BIT16_TRUE, [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], 0)).toEqual(BIT16_FALSE);
+
+      // Load something on a few different addresses, validate that the same
+      // values can be fetched again.
+      expect(mem(BIT16_TRUE, [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 1)).toEqual(BIT16_TRUE);
+      expect(mem(uneven, [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], 1)).toEqual(uneven);
+
+      // Check the values.
+      expect(mem(BIT16_FALSE, [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 0)).toEqual(BIT16_TRUE);
+      expect(mem(uneven, [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], 0)).toEqual(uneven);
+    });
+  });
+
+  describe("RAM4K", () => {
+    it("should load and store the various addresses independently", () => {
+      const _ = binaryToBit16;
+      const uneven = _("1010101010101010");
+      const mem = Ram16K();
+
+      // Check the initial state of the registers.
+      expect(mem(BIT16_TRUE, [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], 0)).toEqual(BIT16_FALSE);
+
+      // Load something on a few different addresses, validate that the same
+      // values can be fetched again.
+      expect(mem(BIT16_TRUE, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 1)).toEqual(BIT16_TRUE);
+      expect(mem(uneven, [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 1)).toEqual(uneven);
+
+      // Check the values.
+      expect(mem(BIT16_FALSE, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 0)).toEqual(BIT16_TRUE);
+      expect(mem(uneven, [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0)).toEqual(uneven);
     });
   });
 });

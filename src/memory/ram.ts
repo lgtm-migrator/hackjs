@@ -1,5 +1,5 @@
 import { DMux8Way, Mux, Mux8Way16 } from "../gates";
-import { Bit, Bit16, Bit3, Bit6, Bit9 } from "../hackjs";
+import { Bit, Bit12, Bit16, Bit3, Bit6, Bit9, Bit15 } from "../hackjs";
 import { bitToSRFlipFlopOutput } from "../helpers";
 import { GatedDFlipFlop } from "./flipflop";
 
@@ -100,6 +100,51 @@ export const Ram512 = () => {
     // Call all the registers with the demuxified load bit.
     const output = memory.map((register, idx) =>
       register(input, address.slice(3) as Bit6, loadbits[idx]));
+    // Multiplex the output to make sure the correct address is returned.
+    return Mux8Way16(
+      output[0], output[1], output[2], output[3],
+      output[4], output[5], output[6], output[7],
+      address.slice(0, 3) as Bit3);
+  };
+};
+
+/**
+ * A RAM unit with 8 x 512 register RAM units, of 16 bits.
+ *
+ * Call this function to initialize a new RAM unit.
+ */
+export const Ram4K = () => {
+  const memory = [...Array(8)].map(() => Ram512());
+
+  return (input: Bit16, address: Bit12, load: Bit): Bit16 => {
+    // Start by demuxifying the load bits for each register.
+    const loadbits = DMux8Way(load, address.slice(0, 3) as Bit3);
+    // Call all the registers with the demuxified load bit.
+    const output = memory.map((register, idx) =>
+      register(input, address.slice(3) as Bit9, loadbits[idx]));
+    // Multiplex the output to make sure the correct address is returned.
+    return Mux8Way16(
+      output[0], output[1], output[2], output[3],
+      output[4], output[5], output[6], output[7],
+      address.slice(0, 3) as Bit3);
+  };
+};
+
+
+/**
+ * A RAM unit with 8 x 4096 register RAM units, of 16 bits.
+ *
+ * Call this function to initialize a new RAM unit.
+ */
+export const Ram16K = () => {
+  const memory = [...Array(8)].map(() => Ram4K());
+
+  return (input: Bit16, address: Bit15, load: Bit): Bit16 => {
+    // Start by demuxifying the load bits for each register.
+    const loadbits = DMux8Way(load, address.slice(0, 3) as Bit3);
+    // Call all the registers with the demuxified load bit.
+    const output = memory.map((register, idx) =>
+      register(input, address.slice(3) as Bit12, loadbits[idx]));
     // Multiplex the output to make sure the correct address is returned.
     return Mux8Way16(
       output[0], output[1], output[2], output[3],

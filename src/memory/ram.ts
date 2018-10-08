@@ -130,7 +130,6 @@ export const Ram4K = () => {
   };
 };
 
-
 /**
  * A RAM unit with 8 x 4096 register RAM units, of 16 bits.
  *

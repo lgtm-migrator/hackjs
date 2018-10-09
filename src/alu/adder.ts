@@ -59,7 +59,7 @@ export const Adder8 = (a: Bit8, b: Bit8): Bit8 => {
 };
 
 /**
- * An 8-bit adder, adds two bytes together and returns the sum.
+ * An 16-bit adder, adds two bytes together and returns the sum.
  * Ignoring any overflows.
  */
 export const Adder16 = (a: Bit16, b: Bit16): Bit16 => {

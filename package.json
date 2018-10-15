@@ -7,6 +7,7 @@
     "test": "jest --watch",
     "test-coverage": "jest --coverage",
     "coveralls": "coveralls < coverage/lcov.info",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "tsc"
   },
   "dependencies": {

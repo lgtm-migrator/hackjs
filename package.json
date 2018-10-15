@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --watch",
     "test-coverage": "jest --coverage",
-    "coveralls": "coveralls < coverage/lcov.info"
+    "coveralls": "coveralls < coverage/lcov.info",
+    "start": "tsc"
   },
   "dependencies": {
     "@types/jest": "^23.3.5",

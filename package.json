@@ -13,7 +13,7 @@
   "dependencies": {
     "@types/jest": "^24.0.9",
     "@types/node": "^10.12.19",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.3",
     "jest": "^24.1.0",
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.2",

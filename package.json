@@ -11,6 +11,7 @@
     "start": "tsc"
   },
   "dependencies": {
+    "@types/node": "^11.9.0",
     "@types/jest": "^24.0.9",
     "@types/node": "^10.12.19",
     "coveralls": "^3.0.3",

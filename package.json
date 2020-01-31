@@ -1,0 +1,41 @@
+{
+  "name": "hackjs",
+  "version": "1.0.0",
+  "description": "An implementation of the Hack computer, based on nand2tetris",
+  "private": true,
+  "scripts": {
+    "test": "jest --watch",
+    "test-coverage": "jest --coverage",
+    "coveralls": "coveralls < coverage/lcov.info",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "tsc"
+  },
+  "dependencies": {
+    "@types/node": "^11.9.0",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^10.12.19",
+    "coveralls": "^3.0.5",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.0",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.5.3"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}

@@ -398,10 +398,10 @@
     jest-diff "^25.1.0"
     pretty-format "^25.1.0"
 
-"@types/node@^13.7.1":
-  version "13.7.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.7.1.tgz#238eb34a66431b71d2aaddeaa7db166f25971a0d"
-  integrity sha512-Zq8gcQGmn4txQEJeiXo/KiLpon8TzAl0kmKH4zdWctPj05nWwp1ClMdAVEloqrQKfaC48PNLdgN/aVaLqUrluA==
+"@types/node@^13.9.6":
+  version "13.9.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.9.6.tgz#3371aa845ca4dfb86c2ff7a9a3bf62d86a3a59f6"
+  integrity sha512-ojnAmpyicIR0pS40ZA3dfOXeyRjNFMDcuImX8dVdqkfINnI/V6+cdyYnU7GaMIXeSPAfi3oCJaDLOYY927Rizw==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
